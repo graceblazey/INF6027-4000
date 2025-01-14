@@ -1,7 +1,7 @@
 ## README for INF6027_main and INF4000_main
 
 Repository for files related to INF6027 (Intro to Data Science) and INF4000 (Data Visualisation) assessments.
-
+This file contains details of the dataset and instructions for running the code.
 
 ## Column Descriptions (from dataset files)
 
@@ -25,3 +25,29 @@ Repository for files related to INF6027 (Intro to Data Science) and INF4000 (Dat
 - **tempo**: The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is the speed or pace of a given piece and derives directly from the average beat duration
 - **time_signature**: An estimated time signature. The time signature (meter) is a notational convention to specify how many beats are in each bar (or measure). The time signature ranges from 3 to 7 indicating time signatures of `3/4`, to `7/4`.
 - **track_genre**: The genre in which the track belongs
+
+## Instructions for running INF6027_main
+
+The code can be run in the order it is written to gain the results described in INF6027 Assessment Section 3.1 Results. More specifically: 
+
+1. Install required packages to load libraries (all listed at the top of the code). The same libraries are listed in INF6027_main and INF4000_main for ease of installing all packages.
+2. Ensure `dataset.csv` is in the working directory and load in the data.
+3. Clean the data using the steps in lines 14-28.
+4. Separate the genres to be used. Other genres can be used if care is taken to replace every instance of the old genre in the code.
+5.Exploratory data analysis produces PCA graph and brief observation of popularity correlation with another variable.
+6. Multinomial logistic regression on lines 69-94. Sankey diagram can be produced on lines 96-106
+7. Multiple linear regression on lines 108-202, each genre is modeled in turn and graphics are produced during modelling.
+
+## Instructions for running INF4000_main
+
+The code can be run in order, or individual visualisations produced independently.
+
+1. Install required packages to load libraries (all listed at the top of the code). The same libraries are listed in INF6027_main and INF4000_main for ease of installing all packages.
+2. Ensure `dataset.csv` is in the working directory and load in the data.
+3. Clean the data using the steps in lines 14-28.
+4. Separate the genres to be used. Other genres can be used if care is taken to replace every instance of the old genre in the code.
+5. Visualisation 1, PCA: lines 38-55
+6. Visualisation 2, Clustered Bar: lines 57-77
+7. Visualisation 3, Scatter: lines 79-89
+8. Visualisation 4, Violins: lines 91-109
+9. Additional visualisations: Spider (111-126), Pie (128-141), Parallel Coordinates (143-151)
