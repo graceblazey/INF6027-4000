@@ -3,13 +3,13 @@
 Repository for files related to INF6027 (Intro to Data Science) and INF4000 (Data Visualisation) assessments.
 
 
-# Column Descriptions (from dataset files)
+## Column Descriptions (from dataset files)
 
 - **track_id**: The Spotify ID for the track
 - **artists**: The artists' names who performed the track. If there is more than one artist, they are separated by a `;`
 - **album_name**: The album name in which the track appears
 - **track_name**: Name of the track
-- **popularity**: **The popularity of a track is a value between 0 and 100, with 100 being the most popular**. The popularity is calculated by algorithm and is based, in the most part, on the total number of plays the track has had and how recent those plays are. Generally speaking, songs that are being played a lot now will have a higher popularity than songs that were played a lot in the past. Duplicate tracks (e.g. the same track from a single and an album) are rated independently. Artist and album popularity is derived mathematically from track popularity.
+- **popularity**: The popularity of a track is a value between 0 and 100, with 100 being the most popular. The popularity is calculated by algorithm and is based, in the most part, on the total number of plays the track has had and how recent those plays are. Generally speaking, songs that are being played a lot now will have a higher popularity than songs that were played a lot in the past. Duplicate tracks (e.g. the same track from a single and an album) are rated independently. Artist and album popularity is derived mathematically from track popularity.
 - **duration_ms**: The track length in milliseconds
 - **explicit**: Whether or not the track has explicit lyrics (true = yes it does; false = no it does not OR unknown)
 - **danceability**: Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable
