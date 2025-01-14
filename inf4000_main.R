@@ -1,4 +1,4 @@
-# Libraries
+## Libraries
 library(tidyverse)
 library(gridExtra)
 library(GGally)
@@ -7,10 +7,10 @@ library(tidymodels)
 library(ggradar)
 library(scales)
 
-# Load in data set
+## Load in data set
 tracks<-read_csv("dataset.csv")
 
-# ~~ data cleaning
+## Data Cleaning
 
 # remove rows where the artist and track_name are the same
 #make column concatenating artist and track_name
@@ -26,15 +26,19 @@ tracks <- subset(tracks, select=c('track_id','artists','album_name','track_name'
                                   'acousticness','instrumentalness','liveness',
                                   'valence','tempo','time_signature','track_genre'))
 
+# isolate the genres of interest
 heavy_metal<-tracks[grep("heavy-metal",tracks$track_genre),]
 jazz<-tracks[grep("jazz",tracks$track_genre),]
 hip_hop<-tracks[grep("hip-hop",tracks$track_genre),]
 comedy<-tracks[grep("comedy",tracks$track_genre),]
 
+# make a data frame with only the genres of interest
 new_list<-rbind(heavy_metal, jazz, hip_hop, comedy)
 
+# define the colours that will be used in the graphics
 graph_cols<-c("#D0B066A0","#048BA8A0","#16DB93A0","#A4036FA0")
 
+# run PCA on the genres
 pca<- prcomp(new_list[,c(8,9,10,11,13,14,15,16,17,18)], scale=TRUE)
 new.pca<-data.frame(
   track_name=new_list$track_name,
@@ -43,7 +47,7 @@ new.pca<-data.frame(
   PC2=pca$x[,2]
 )
 
-# final PCA plot
+# PCA plot
 ggplot(new.pca, aes(PC1, PC2)) +
   geom_point(aes(colour=genre, shape=genre, size=4)) +
   theme_light() +
@@ -54,6 +58,7 @@ ggplot(new.pca, aes(PC1, PC2)) +
        caption="Spotify dataset", tag="1") +
   guides(size="none")
 
+# get values for clustered bar
 specie<-c(rep("danceability",4), rep("energy",4), rep("speechiness", 4), rep("acousticness", 4),
           rep("instrumentalness", 4), rep("valence", 4))
 condition<-rep(c("comedy","heavy-metal","hip-hop","jazz"), 6)
@@ -65,7 +70,7 @@ value<-c(mean(comedy$danceability), mean(heavy_metal$danceability), mean(hip_hop
          mean(comedy$valence), mean(heavy_metal$valence), mean(hip_hop$valence), mean(jazz$valence))
 avgs<-data.frame(specie,condition,value)
 
-# final clustered bar
+# plot clustered bar
 ggplot(avgs, aes(fill=condition, y=value, x=specie)) +
   geom_bar(position = "dodge", stat = "identity") +
   theme_light() +
@@ -76,7 +81,7 @@ ggplot(avgs, aes(fill=condition, y=value, x=specie)) +
        x="Musical Component", y="Mean", fill="Genre",
        caption="Spotify dataset", tag="2")
 
-# final scatter
+# plot scatter
 ggplot(new_list, aes(valence, danceability)) +
   geom_point(size=4, aes(colour=track_genre, shape=track_genre)) +
   geom_smooth(method="lm", se=FALSE, colour="black") +
@@ -88,7 +93,7 @@ ggplot(new_list, aes(valence, danceability)) +
        title="Danceability vs Valence for Selected Genres",
        caption="Spotify dataset", tag="3")
 
-# final violins
+# plot violins
 v1<-ggplot(new_list, aes(x=track_genre, y=danceability, fill=track_genre)) +
   geom_violin() +
   theme_light() +
@@ -108,7 +113,7 @@ v2<-ggplot(new_list, aes(x=track_genre, y=valence, fill=track_genre)) +
 
 grid.arrange(v1,v2,ncol=2)
 
-# final spider
+# plot spider
 n_new_list<-new_list
 n_new_list$popularity<-NULL
 n_new_list$duration_ms<-NULL
@@ -125,7 +130,7 @@ n_new_list %>%
   summarise_if(is.numeric, mean) %>%
   ggradar(axis.label.size=12, legend.text.size=32)
 
-# final pie
+# plot pie
 group<-c("comedy", "heavy-metal", "hip-hop", "jazz")
 dance_values<-c(mean(comedy$danceability), mean(heavy_metal$danceability), mean(hip_hop$danceability), mean(jazz$danceability))
 pi_data<-data.frame(group,dance_values)
@@ -140,7 +145,7 @@ ggplot(pi_data, aes(x="",y=dance_values,fill=group)) +
   labs(x=NULL, y=NULL, fill="Genre",
        title="Danceability proportion of songs by genre")
 
-# final parallel coords
+# plot parallel coords
 ggparcoord(new_list, columns=c(14,8,9,15,13,17),
            groupColumn=20) +
   theme(axis.text.x=element_text(angle=45),
